@@ -146,7 +146,7 @@ public class AuthFilter extends OncePerRequestFilter {
     need this method for basic auth token authentication
      */
     private UsernamePasswordAuthenticationToken authenticateViaPassword(String plainPassword, UserDetails userDetails) {
-        if (passwordEncoder.encode(plainPassword).equals(userDetails.getPassword())) {
+        if (passwordEncoder.matches(plainPassword, userDetails.getPassword())) {
             return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         } else {
             return new UsernamePasswordAuthenticationToken(null,null);
